@@ -24,7 +24,7 @@ void niveau_bronze(unsigned long jscore){												/* Fonction qui gère tous 
 	fclose(best_score);																	/* Fermeture du fichier bestbronze */
 
 	if(jscore < bscore){																/* On regarde si le score du joueur ( jscore ) est meilleur ( plus petit ) que le  précédent meilleur score */
-
+	
 		ChoisirCouleurDessin(CouleurParComposante(0,0,0));								/* Affichage du message "Nouveau meilleur score" */
 		EcrireTexte(550, 447, "Nouveau meilleur score!", 1);							/* Affichage du message "Nouveau meilleur score" */
 
@@ -57,7 +57,7 @@ void niveau_platine(unsigned long jscore){												/* Fonction qui gère tous
 	fclose(best_score);																	/* Fermeture du fichier bestplatinum */
 
 	if(jscore < bscore){																/* On regarde si le score du joueur ( jscore ) est meilleur ( plus petit ) que le  précédent meilleur score */
-																						/* Si c'est le cas : */
+																				/* Si c'est le cas : */
 		ChoisirCouleurDessin(CouleurParComposante(0,0,0));								/* Affichage du message "Nouveau meilleur score" */
 		EcrireTexte(550, 447, "Nouveau meilleur score!", 1);							/* Affichage du message "Nouveau meilleur score" */
 
@@ -90,7 +90,7 @@ void niveau_master(unsigned long jscore){												/* Fonction qui gère tous 
 	fclose(best_score);																	/* Fermeture du fichier bestmaster */
 
 	if(jscore < bscore){																/* On regarde si le score du joueur ( jscore ) est meilleur ( plus petit ) que le  précédent meilleur score */
-
+		
 		ChoisirCouleurDessin(CouleurParComposante(0,0,0));								/* Affichage du message "Nouveau meilleur score" */
 		EcrireTexte(550, 447, "Nouveau meilleur score!", 1);							/* Affichage du message "Nouveau meilleur score" */
 
@@ -106,7 +106,7 @@ void niveau_master(unsigned long jscore){												/* Fonction qui gère tous 
 
 void page_finale(unsigned long score, int niveau){										/* Fonction qui gère l'affichage de toutes les informations du menu de fin */
 	char str[50];																		/* Tableau qui recevra le temps du joueur en caractères */
-	int logo=ChargerSprite("./Images/logo.xpm");										/* Variable qui possède la valeur correspondant à l'image du logo */
+	int logo=ChargerSprite("./Images/logo.png");										/* Variable qui possède la valeur correspondant à l'image du logo */
 	int quitter=ChargerSprite("./Images/icons/stop.png");								/* Variable qui possède la valeur correspondant à l'image du bouton "Quitter" */
 
 	ChoisirCouleurDessin(CouleurParComposante(0,0,0));									/* Affichage carré en fond du menu de fin */

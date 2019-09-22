@@ -21,7 +21,7 @@ main.o : accueil.h game.h fin.h
 #-------------------------
 
 Executable : $(OFILES)
-			$(CC) -lgraph -ansi -o Executable $(OFILES) $(CFLAGS) 
+			$(CC) -ansi -o Executable $(OFILES) $(CFLAGS) -lgraph
 
 clean : -rm -f $(OFILES)
 

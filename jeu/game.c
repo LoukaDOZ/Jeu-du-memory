@@ -193,13 +193,31 @@ void afficher_recto(int* type, int a, int x_pos, int y_pos){										/* Cette f
 	LibererSprite(imageCarte);																		/* On libère le sprite */
 }
 
+void afficher_fond(int* type, int size, int pos_x){									/* On utilise cette fonction pour afficher les cartes face cachée ou découverte */
+	int j;
+	int position_x=pos_x, position_y=20;															/* Positions initiales de la première carte ( en haut à gauche ) */
+	int fond=ChargerSprite("./Images/fondcartes.png");												/* Variable qui possède la valeur correspondant à l'image qui fait le contour des cartes */													
+	int couleur = 0;
 
+	for(j=0; j<size*5; j++, position_x+=120){														/* On parcours toutes les cartes par rapport à leur position en x et y */
+
+		if(j==size || j==size*2 || j==size*3 || j==size*4){											/* Si on atteint le bout de la ligne */
+
+			position_x=pos_x;																		/* On revient à la première colonne */
+			position_y+=140;																		/* Mais cette fois on passe à la ligne suivante */
+		}
+
+		AfficherSprite(fond,position_x,position_y);												/* On affiche l'image du contour des cartes */
+		ChoisirCouleurDessin(CouleurParComposante(255,255,255));								/* On créé un rectangle blanc plus petit par dessus */
+		RemplirRectangle(position_x+3,position_y+3,94,114);										/* On créé un rectangle blanc plus petit par dessus */
+	}
+	LibererSprite(fond);																			/* On libère le sprite */
+}
 
 void afficher_verso(int* facec, int* type, int size, int pos_x){									/* On utilise cette fonction pour afficher les cartes face cachée ou découverte */
 	int j;
 	int position_x=pos_x, position_y=20;															/* Positions initiales de la première carte ( en haut à gauche ) */													
-	int logo=ChargerSprite("./Images/logo.xpm");													/* Variable qui possède la valeur correspondant à l'image du logo */
-	int fond=ChargerSprite("./Images/fondcartes.png");												/* Variable qui possède la valeur correspondant à l'image qui fait le contour des cartes */
+	int logo=ChargerSprite("./Images/logo.png");													/* Variable qui possède la valeur correspondant à l'image du logo */
 	int couleur = 0;
 
 	for(j=0; j<size*5; j++, position_x+=120){														/* On parcours toutes les cartes par rapport à leur position en x et y */
@@ -212,9 +230,6 @@ void afficher_verso(int* facec, int* type, int size, int pos_x){									/* On u
 
 		if(facec[j]==0){																			/* Si la carte doit etre face cachée ( vaut 0 ) */
 
-			AfficherSprite(fond,position_x,position_y);												/* On affiche l'image du contour des cartes */
-			ChoisirCouleurDessin(CouleurParComposante(255,255,255));								/* On créé un rectangle blanc plus petit par dessus */
-			RemplirRectangle(position_x+3,position_y+3,94,114);										/* On créé un rectangle blanc plus petit par dessus */
 			AfficherSprite(logo,position_x+10,position_y+30);										/* On affiche l'image du logo */
 		}else{
 
@@ -223,7 +238,6 @@ void afficher_verso(int* facec, int* type, int size, int pos_x){									/* On u
 	}
 
 	LibererSprite(logo);																			/* On libère le sprite */
-	LibererSprite(fond);																			/* On libère le sprite */
 }
 
 
@@ -282,6 +296,8 @@ unsigned long triche(int* typec, int size, int x){													/* Cette fonction
 			tempsTriche = Microsecondes();															/* Si le mode tricheur est activé, tempsTriche prend le temps écoulé durant le lancement et l'arrêt du mode tricheur */
 
 			if(ToucheEnAttente()==1 && Touche()=='t'){												/* Si T est de nouveau pressé */
+
+			afficher_fond(typec, size, x);
 
 				free(tricheFace);																	/* Libération du tableau tricheFace */
 				break;																				/* On quitte la boucle while et donc la fonction */
@@ -368,6 +384,10 @@ unsigned long timer(unsigned long chronoV, unsigned long chronoF, unsigned long 
 
 		ChoisirCouleurDessin(CouleurParComposante(255,255,255));									/* Affichage du nouveau temps */
 		EcrireTexte(450, 780, str, 2);																/* Affichage du nouveau temps */
+
+		int exit=ChargerSprite("./Images/icons/exit.png");
+		AfficherSprite(exit,1050,715);
+		LibererSprite(exit);
 		}
 
 	return *incremente;																				/* Sortie de la fonction avec revoie du temps */
@@ -425,14 +445,21 @@ unsigned long game(int taille, unsigned long chronoFixe){											/* Fonction 
 	RemplirRectangle(0,714,1270,100);																/* Initialiation de la fenêtre de jeu */
 
 	x=marge(taille);																				/* Appel d'une fonction pour obtenir une marge pour l'affichage des cartes */
+	afficher_fond(typeCarte, taille, x);
 	afficher_verso(faceCarte, typeCarte, taille, x);												/* Appel d'une fonction pour afficher les cartes */
+
+	int exit=ChargerSprite("./Images/icons/exit.png");
+	AfficherSprite(exit,1050,715);
+	LibererSprite(exit);
 
 	while(1){
 
 		temps1 = Microsecondes();																	/* Attribution d'une valeur en microsecondes à temps1 */
 		chronoVariable = Microsecondes();
 
-		tempsTriche = triche(typeCarte, taille, x);													/* Appel de la fonction pour le mode triche */
+		if(tempsFinal>2){
+			tempsTriche = triche(typeCarte, taille, x);													/* Appel de la fonction pour le mode triche */
+		}
 		
 		afficher_verso(faceCarte, typeCarte, taille, x);											/* Appel d'une fonction pour afficher les cartes */
 
@@ -442,6 +469,11 @@ unsigned long game(int taille, unsigned long chronoFixe){											/* Fonction 
 			SourisPosition();																		/* Récupération des coordonnées de la souris */
 			x_souris=_X;																			/* Récupération des coordonnées de la souris */
 			y_souris=_Y;																			/* Récupération des coordonnées de la souris */
+
+			if(x_souris>=1050 && x_souris<=1170 && y_souris>=715 && y_souris<=832){
+				tempsFinal = 0;
+				break;
+			}
 
 			compteur=clic_carte(faceCarte, nb_retournee, cartesTrouvees, x_souris, y_souris, x, taille, compteur);	/* Appel de la fonction clic_carte après le clic souris */
 
@@ -455,12 +487,15 @@ unsigned long game(int taille, unsigned long chronoFixe){											/* Fonction 
 					
 				cartes_differentes(temps1, temps2, nb_retournee, faceCarte);						/* On appel cette fonction pour tout remettre à 0 */
 				}
-	
+				
+				afficher_fond(typeCarte, taille, x);
+				afficher_verso(faceCarte, typeCarte, taille, x);
 				compteur=0;																			/* Compteur est remis à 0 */
 			}
 
 		gagner=victoire(faceCarte, taille);															/* Appel de la fonction victoire pour vérifier si toutes les cartes ont été retournées */
 		if(gagner==1){																				/* Si oui */
+			afficher_verso(faceCarte, typeCarte, taille, x);										/* Appel d'une fonction pour afficher les cartes */
 			sleep(1);																				/* On attend 1 seconde */
 			break;																					/* On quitte la boucle while */
 		}

@@ -29,7 +29,9 @@ void regles(void) {																	/* Fonction qui affiche les règles ( Sa gra
 		EcrireTexte(50,375,"- Quand toutes les cartes sont decouvertes, le chronometre s'arretera et affichera le score du joueur",1);
 		EcrireTexte(60,445,"- Mode Triche -",2);
 		EcrireTexte(50,485,"En appuyant sur 'T', il est possible d'utiliser le mode tricheur.",1);
-		EcrireTexte(605,485,"Mais ca n'est evidemment pas recommande pour de reelles parties.",1);
+		EcrireTexte(590,485,"Mais ca n'est evidemment pas recommande pour de reelles parties.",1);
+		EcrireTexte(50,510,"Le mode tricheur est disponible qu'au bout de 3 secondes de jeu.",1);
+		EcrireTexte(50,535,"Appuyez de nouveau sur 'T' pour quitter le mode tricheur.",1);
 	/* Fin de l'affichage de la description des règles : */
 
 			ChoisirCouleurDessin(CouleurParComposante(255,0,0));					/* Bouton "Retour au menu" */
