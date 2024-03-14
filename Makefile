@@ -23,7 +23,8 @@ main.o : accueil.h game.h fin.h
 Executable : $(OFILES)
 			$(CC) -ansi -o Executable $(OFILES) $(CFLAGS) -lgraph
 
-clean : -rm -f $(OFILES)
+clean : 
+	-rm -f $(OFILES)
 
 .PHONY : but clean
 
