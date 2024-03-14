@@ -1,15 +1,17 @@
 # Jeu du mémory / Memory game
 
 Memory game with an Overwatch style. All cards are Overwatch characters' ultimate.
-Uses a library given by the University Institute of Technology of Sénart-Fontainebleau when I was a studen.
+Uses a graphical library given by the University Institute of Technology of Sénart-Fontainebleau when I was a studen.
 
 ## Usage
 
-| Command           | Description          |
-| ----------------- | -------------------- |
-| `make Executable` | Compile              |
-| `make run`        | Compile and run      |
-| `make clean`      | Clean compiled files |
+| Command           | Description                 |
+| ----------------- | --------------------------- |
+| `make install`    | Install graphical library   |
+| `make uninstall`  | Uninstall graphical library |
+| `make build`      | Compile game                |
+| `make run`        | Run game                    |
+| `make clean`      | Remove compiled files       |
 
 ## Screenshots
 

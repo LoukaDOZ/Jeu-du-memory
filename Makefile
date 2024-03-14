@@ -1,5 +1,3 @@
-but : Executable
-
 OFILES = 	main.o \
 			game.o \
 			fin.o\
@@ -17,16 +15,29 @@ game.o : game.h
 
 main.o : accueil.h game.h fin.h
 
+executable:
+	$(CC) -ansi -o executable $(OFILES) $(CFLAGS) -lgraph
+
+clean-o-files:
+	rm -f $(OFILES)
+
 
 #-------------------------
 
-Executable : $(OFILES)
-			$(CC) -ansi -o Executable $(OFILES) $(CFLAGS) -lgraph
+.PHONY : build clean
 
-clean : 
-	-rm -f $(OFILES)
+install:
+	tar -xf bibliotheque-graphique-iut-1.1.tar.xz
+	cd bibliotheque-graphique-iut-1.1 && ./configure && make && make install
 
-.PHONY : but clean
+uninstall:
+	cd bibliotheque-graphique-iut-1.1 && make uninstall
+	rm -rf bibliotheque-graphique-iut-1.1 
 
-run : but
-	./Executable
+build : $(OFILES) executable clean-o-files
+
+run :
+	./executable
+
+clean : clean-o-files
+	rm -f executable
