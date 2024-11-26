@@ -24,7 +24,7 @@ clean-o-files:
 
 #-------------------------
 
-.PHONY : build clean
+.PHONY : install build clean
 
 install:
 	tar -xf bibliotheque-graphique-iut-1.1.tar.xz

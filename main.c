@@ -28,8 +28,8 @@ int main(void){
 
 		unsigned long chronoFixe = Microsecondes();		/* Constante qui servira au chronomètre */
 
-		timeFinal = game(difficulte, chronoFixe);		/* Appel de la fonction gérera la partie jeu */
-
+		//timeFinal = game(difficulte, chronoFixe);		/* Appel de la fonction gérera la partie jeu */
+timeFinal = 100;
 		if(timeFinal!=0){								/* Si le joueur a cliqué sur "Quitter", acceuil renvoie -1, ici on verifie si c'st le cas */
 		
 			final(timeFinal, difficulte);					/* Appel de la fonction gérera la fin lorsque le joueur à gagné */

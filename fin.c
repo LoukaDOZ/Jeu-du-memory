@@ -15,16 +15,18 @@ void niveau_bronze(unsigned long jscore){												/* Fonction qui gère tous 
 
 	best_score=fopen("bestbronze","r");													/* Ouverture du fichier bestbronze en lecture seule */
 
-	fread(&bscore, sizeof (unsigned long), 1, best_score);								/* Lecture de la valeur du meilleur score en unsigned long enregistrement dans bscore */
+	if(best_score != NULL) {
+		fread(&bscore, sizeof (unsigned long), 1, best_score);							/* Lecture de la valeur du meilleur score en unsigned long enregistrement dans bscore */
+		sprintf(strscore, "Meilleur score en bronze : %04lu s", bscore);				/* Conversion du meilleur temps en "char" et enregistrement de celui-çi dans strscore */
+		fclose(best_score);																/* Fermeture du fichier bestbronze */
+	} else
+		sprintf(strscore, "Meilleur score en bronze : Aucun");
 
-	sprintf(strscore, "Meilleur score en bronze : %04lu s", bscore);					/* Conversion du meilleur temps en "char" et enregistrement de celui-çi dans strscore */
 	ChoisirCouleurDessin(CouleurParComposante(255,51,51));								/* Affichage du meilleur temps */
 	EcrireTexte(260, 370, strscore, 2);													/* Affichage du meilleur temps */
 
-	fclose(best_score);																	/* Fermeture du fichier bestbronze */
-
-	if(jscore < bscore){																/* On regarde si le score du joueur ( jscore ) est meilleur ( plus petit ) que le  précédent meilleur score */
-	
+	if(best_score == NULL || jscore < bscore){											/* On regarde si le score du joueur ( jscore ) est meilleur ( plus petit ) que le  précédent meilleur score */
+		
 		ChoisirCouleurDessin(CouleurParComposante(0,0,0));								/* Affichage du message "Nouveau meilleur score" */
 		EcrireTexte(550, 447, "Nouveau meilleur score!", 1);							/* Affichage du message "Nouveau meilleur score" */
 
@@ -48,16 +50,17 @@ void niveau_platine(unsigned long jscore){												/* Fonction qui gère tous
 
 	best_score=fopen("bestplatinum","r");												/* Ouverture du fichier bestplatinum en lecture seule */
 
-	fread(&bscore, sizeof (unsigned long), 1, best_score);								/* Lecture de la valeur du meilleur score en unsigned long enregistrement dans bscore */
+	if(best_score != NULL) {
+		fread(&bscore, sizeof (unsigned long), 1, best_score);							/* Lecture de la valeur du meilleur score en unsigned long enregistrement dans bscore */
+		sprintf(strscore, "Meilleur score en platinum : %04lu s", bscore);				/* Conversion du meilleur temps en "char" et enregistrement de celui-çi dans strscore */
+		fclose(best_score);																/* Fermeture du fichier bestplatinum */
+	} else
+		sprintf(strscore, "Meilleur score en platinum : Aucun");
 
-	sprintf(strscore, "Meilleur score en platinum : %04lu s", bscore);					/* Conversion du meilleur temps en "char" et enregistrement de celui-çi dans strscore */
 	ChoisirCouleurDessin(CouleurParComposante(255,51,51));								/* Affichage du meilleur temps */
 	EcrireTexte(260, 370, strscore, 2);													/* Affichage du meilleur temps */
 
-	fclose(best_score);																	/* Fermeture du fichier bestplatinum */
-
-	if(jscore < bscore){																/* On regarde si le score du joueur ( jscore ) est meilleur ( plus petit ) que le  précédent meilleur score */
-																				/* Si c'est le cas : */
+	if(best_score == NULL || jscore < bscore){											/* On regarde si le score du joueur ( jscore ) est meilleur ( plus petit ) que le  précédent meilleur score */
 		ChoisirCouleurDessin(CouleurParComposante(0,0,0));								/* Affichage du message "Nouveau meilleur score" */
 		EcrireTexte(550, 447, "Nouveau meilleur score!", 1);							/* Affichage du message "Nouveau meilleur score" */
 
@@ -81,15 +84,17 @@ void niveau_master(unsigned long jscore){												/* Fonction qui gère tous 
 
 	best_score=fopen("bestmaster","r");													/* Ouverture du fichier bestmaster en lecture seule */
 
-	fread(&bscore, sizeof (unsigned long), 1, best_score);								/* Lecture de la valeur du meilleur score en unsigned long enregistrement dans bscore */
-
-	sprintf(strscore, "Meilleur score en master : %04lu s", bscore);					/* Conversion du meilleur temps en "char" et enregistrement de celui-çi dans strscore */
+	if(best_score != NULL) {
+		fread(&bscore, sizeof (unsigned long), 1, best_score);							/* Lecture de la valeur du meilleur score en unsigned long enregistrement dans bscore */
+		sprintf(strscore, "Meilleur score en master : %04lu s", bscore);				/* Conversion du meilleur temps en "char" et enregistrement de celui-çi dans strscore */
+		fclose(best_score);																/* Fermeture du fichier bestmaster */
+	} else
+		sprintf(strscore, "Meilleur score en master : Aucun");
+	
 	ChoisirCouleurDessin(CouleurParComposante(255,51,51));								/* Affichage du meilleur temps */
 	EcrireTexte(260, 370, strscore, 2);													/* Affichage du meilleur temps */
 
-	fclose(best_score);																	/* Fermeture du fichier bestmaster */
-
-	if(jscore < bscore){																/* On regarde si le score du joueur ( jscore ) est meilleur ( plus petit ) que le  précédent meilleur score */
+	if(best_score == NULL || jscore < bscore){											/* On regarde si le score du joueur ( jscore ) est meilleur ( plus petit ) que le  précédent meilleur score */
 		
 		ChoisirCouleurDessin(CouleurParComposante(0,0,0));								/* Affichage du message "Nouveau meilleur score" */
 		EcrireTexte(550, 447, "Nouveau meilleur score!", 1);							/* Affichage du message "Nouveau meilleur score" */

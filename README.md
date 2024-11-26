@@ -5,13 +5,13 @@ Uses a graphical library given by the University Institute of Technology of Sén
 
 ## Usage
 
-| Command           | Description                 |
-| ----------------- | --------------------------- |
-| `make install`    | Install graphical library   |
-| `make uninstall`  | Uninstall graphical library |
-| `make build`      | Compile game                |
-| `make run`        | Run game                    |
-| `make clean`      | Remove compiled files       |
+| Command          | Description                                |
+|------------------|--------------------------------------------|
+| `make install`   | Install graphical library (require sudo)   |
+| `make uninstall` | Uninstall graphical library (require sudo) |
+| `make build`     | Compile game                               |
+| `make run`       | Run game                                   |
+| `make clean`     | Remove compiled files                      |
 
 ## Screenshots
 
