@@ -40,4 +40,4 @@ run :
 	./executable
 
 clean : clean-o-files
-	rm -f executable
+	rm -f executable bestbronze bestmaster bestplatinum
